@@ -1,0 +1,307 @@
+@import "tailwindcss";
+
+/*
+  Outnext design tokens
+  ---------------------
+  Base:     near-black with a navy tint, so the navy surfaces sit naturally on it.
+  Accent:   one electric cyan ("signal"), used for interactive state and the live
+            parts of diagrams, never as decoration on static text.
+  Lines:    1px hairlines carry structure. Everything visual is drawn in the same
+            line language as the hero system diagram.
+*/
+@theme {
+  --color-base: #070a10;
+  --color-surface: #0c1220;
+  --color-raised: #111a2c;
+  --color-line: #1a2438;
+  --color-line-strong: #283550;
+  --color-ink: #e8edf5;
+  --color-muted: #8f9bb1;
+  --color-faint: #7885a0;
+  --color-signal: #36d1ff;
+  --color-signal-dim: #1b6f8c;
+  --color-azure: #4f7bff;
+  --color-pending: #f3b84b;
+
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, monospace;
+
+  --radius-chip: 4px;
+  --radius-control: 8px;
+  --radius-panel: 14px;
+
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+@layer base {
+  html {
+    background-color: var(--color-base);
+    color: var(--color-ink);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    scroll-behavior: smooth;
+    color-scheme: dark;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  body {
+    font-family: var(--font-sans);
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    overflow-x: clip;
+  }
+
+  ::selection {
+    background: color-mix(in oklab, var(--color-signal) 35%, transparent);
+    color: var(--color-ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-signal);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    text-wrap: balance;
+    font-weight: 560;
+    letter-spacing: -0.028em;
+    line-height: 1.08;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+}
+
+@layer components {
+  /* Type scale (roughly a 1.25 ratio, display steps opened up) */
+  .t-display {
+    font-size: clamp(2.6rem, 1.4rem + 4.6vw, 5.4rem);
+    line-height: 1;
+    letter-spacing: -0.045em;
+    font-weight: 560;
+  }
+  .t-h1 {
+    font-size: clamp(2.25rem, 1.5rem + 2.8vw, 3.9rem);
+    line-height: 1.04;
+    letter-spacing: -0.04em;
+  }
+  .t-h2 {
+    font-size: clamp(1.85rem, 1.35rem + 1.7vw, 2.85rem);
+    line-height: 1.08;
+    letter-spacing: -0.035em;
+  }
+  .t-h3 {
+    font-size: clamp(1.3rem, 1.15rem + 0.5vw, 1.55rem);
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+  }
+  .t-lead {
+    font-size: clamp(1.1rem, 1.02rem + 0.35vw, 1.3rem);
+    line-height: 1.55;
+    color: var(--color-muted);
+  }
+  .t-small {
+    font-size: 0.875rem;
+    line-height: 1.5;
+  }
+  .t-label {
+    font-size: 0.8125rem;
+    line-height: 1.4;
+    color: var(--color-faint);
+    letter-spacing: 0.005em;
+  }
+
+  .container-x {
+    width: 100%;
+    max-width: 1240px;
+    margin-inline: auto;
+    padding-inline: clamp(1.25rem, 0.6rem + 2.6vw, 2.5rem);
+  }
+
+  .section {
+    padding-block: clamp(4rem, 2.75rem + 4vw, 6rem);
+  }
+  .section-tight {
+    padding-block: clamp(3rem, 2.25rem + 3vw, 4.5rem);
+  }
+
+  .hairline {
+    border-color: var(--color-line);
+  }
+
+  /* Technical grid used behind the hero and CTA panels */
+  .bg-grid {
+    background-image:
+      linear-gradient(to right, color-mix(in oklab, var(--color-line) 70%, transparent) 1px, transparent 1px),
+      linear-gradient(to bottom, color-mix(in oklab, var(--color-line) 70%, transparent) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+  .mask-fade {
+    mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, black 30%, transparent 80%);
+  }
+
+  /* Prose for long-form text blocks */
+  .prose-ox {
+    max-width: 66ch;
+    color: var(--color-muted);
+  }
+  .prose-ox p + p {
+    margin-top: 1em;
+  }
+  .prose-ox strong {
+    color: var(--color-ink);
+    font-weight: 560;
+  }
+
+  /* Native disclosure (FAQ) */
+  details.faq > summary {
+    list-style: none;
+    cursor: pointer;
+  }
+  details.faq > summary::-webkit-details-marker {
+    display: none;
+  }
+  details.faq[open] .faq-icon {
+    transform: rotate(45deg);
+  }
+}
+
+/* Hero system diagram */
+@keyframes ox-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes ox-dash {
+  from {
+    stroke-dashoffset: 0;
+  }
+  to {
+    stroke-dashoffset: -1.1;
+  }
+}
+@keyframes ox-node-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes ox-pulse {
+  0%,
+  100% {
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+.ox-node {
+  opacity: 0;
+  animation: ox-node-in 0.6s var(--ease-out-quart) forwards;
+  animation-delay: var(--d, 0s);
+}
+.ox-edge {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: ox-draw 0.9s var(--ease-out-quart) forwards;
+  animation-delay: var(--d, 0s);
+}
+.ox-flow {
+  stroke-dasharray: 0.06 1.04;
+  stroke-dashoffset: 0.06;
+  animation: ox-dash 3.4s linear infinite;
+  animation-delay: var(--d, 0s);
+}
+.ox-blink {
+  animation: ox-pulse 2.4s ease-in-out infinite;
+}
+@media (max-width: 639px) {
+  .ox-diagram .ox-sub {
+    display: none;
+  }
+  .ox-diagram .ox-label {
+    font-size: 19px;
+    transform: translateY(8px);
+  }
+  .ox-diagram .ox-dot {
+    transform: translateY(6.5px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ox-node,
+  .ox-edge {
+    animation: none;
+    opacity: 1;
+    stroke-dashoffset: 0;
+  }
+  .ox-flow {
+    display: none;
+  }
+  .ox-blink {
+    animation: none;
+  }
+}
+
+/* Page transition */
+@keyframes ox-page-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.page-in {
+  animation: ox-page-in 0.4s var(--ease-out-quart) both;
+}
+
+/* Hero text reveal: one orchestrated moment on load */
+@keyframes ox-rise {
+  from {
+    opacity: 0;
+    transform: translateY(0.35em);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.hero-word {
+  animation: ox-rise 0.7s var(--ease-out-quart) both;
+  animation-delay: var(--d, 0s);
+}
+.hero-fade {
+  animation: ox-rise 0.7s var(--ease-out-quart) both;
+  animation-delay: calc(0.3s + var(--d, 0s));
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-word,
+  .hero-fade,
+  .page-in {
+    animation: none;
+  }
+}
