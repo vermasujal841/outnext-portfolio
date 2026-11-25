@@ -6,6 +6,7 @@ import { CtaBand } from "@/components/cta-band";
 import { Pending, PendingBlock } from "@/components/pending";
 import { ProjectVideo } from "@/components/project-video";
 import { PageHeader } from "@/components/section";
+import { testimonialCaption, testimonials } from "@/content/company";
 import { getProject, projects } from "@/content/projects";
 import { getServiceCategory } from "@/content/services";
 import { showPlaceholders } from "@/content/site";
@@ -46,6 +47,7 @@ export default async function CaseStudyPage({ params }: Props) {
   if (!p || (!p.ready && !showPlaceholders)) notFound();
 
   const index = projects.indexOf(p);
+  const quote = testimonials.find((t) => t.project === p.slug);
   const category = p.category ? getServiceCategory(p.category) : undefined;
   const meta: { label: string; value: React.ReactNode }[] = [
     { label: "Client", value: p.client ?? <Pending label="client" /> },
@@ -179,6 +181,15 @@ export default async function CaseStudyPage({ params }: Props) {
         ) : showPlaceholders ? (
           <Block title="Outcomes">
             <Pending label="measured results (only if real data exists)" />
+          </Block>
+        ) : null}
+
+        {quote ? (
+          <Block title="What the client says">
+            <figure className="max-w-[64ch]">
+              <blockquote className="text-[1.125rem] leading-relaxed text-ink">“{quote.quote}”</blockquote>
+              <figcaption className="mt-4 t-small text-muted">{testimonialCaption(quote)}</figcaption>
+            </figure>
           </Block>
         ) : null}
 

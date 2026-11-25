@@ -14,7 +14,8 @@
 export const PENDING = null;
 export type Maybe<T> = T | null;
 
-export const showPlaceholders = process.env.NEXT_PUBLIC_SHOW_PLACEHOLDERS !== "false";
+/** Off by default. Set NEXT_PUBLIC_SHOW_PLACEHOLDERS=true locally to see unfilled slots while editing. */
+export const showPlaceholders = process.env.NEXT_PUBLIC_SHOW_PLACEHOLDERS === "true";
 
 /** Canonical origin. PENDING: set NEXT_PUBLIC_SITE_URL to Outnext's real domain. */
 export const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000").replace(/\/$/, "");
@@ -57,10 +58,11 @@ export const contact: {
   showMap: boolean;
 } = {
   email: "support@gostuds.com",
-  phone: PENDING,
+  /** Official contact: founder Raghvendra Singh */
+  phone: "+91 87428 65525",
   /** Founder's WhatsApp (Raghvendra Singh) */
   whatsapp: "918742865525",
-  hours: PENDING,
+  hours: "10:00 AM – 8:00 PM IST",
   grievanceContact: { name: "Sujal Verma", email: "sujal@gostuds.com" },
   showMap: true,
 };
@@ -69,10 +71,8 @@ export type SocialLink = { label: string; href: Maybe<string> };
 
 /** Add only the profiles that exist. Leave href as PENDING until the URL is provided. */
 export const social: SocialLink[] = [
-  { label: "LinkedIn", href: PENDING },
-  { label: "Instagram", href: PENDING },
-  { label: "X", href: PENDING },
-  { label: "GitHub", href: PENDING },
+  { label: "LinkedIn", href: "https://www.linkedin.com/company/gostuds/" },
+  { label: "Instagram", href: "https://www.instagram.com/gostudsofficial/" },
 ];
 
 /**

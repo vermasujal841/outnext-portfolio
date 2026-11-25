@@ -10,7 +10,7 @@ import { SectionHeader } from "@/components/section";
 import { ServicesExplorer } from "@/components/services-explorer";
 import { SystemDiagram } from "@/components/system-diagram";
 import { TeamCard, isMemberVisible } from "@/components/team-card";
-import { credibility, faqs, hero, pillars, process, stack, testimonials } from "@/content/company";
+import { credibility, faqs, hero, pillars, process, stack, testimonialCaption, testimonials } from "@/content/company";
 import { industries } from "@/content/industries";
 import { projects } from "@/content/projects";
 import { serviceCategories, totalServiceCount } from "@/content/services";
@@ -240,12 +240,18 @@ export default function HomePage() {
             <h2 id="testimonials-title" className="t-h2">
               What clients say
             </h2>
-            <div className="mt-12 grid gap-10 md:grid-cols-2">
+            <div className={`mt-12 grid gap-10 ${testimonials.length > 1 ? "md:grid-cols-2" : ""}`}>
               {testimonials.map((t) => (
-                <figure key={t.name} className="border-l border-signal/60 pl-6">
+                <figure key={t.quote} className="max-w-[68ch] border-l border-signal/60 pl-6">
                   <blockquote className="text-[1.25rem] leading-snug tracking-[-0.01em]">“{t.quote}”</blockquote>
                   <figcaption className="mt-4 t-small text-muted">
-                    {t.name}, {t.role}, {t.company}
+                    {t.project ? (
+                      <Link href={`/work/${t.project}`} className="underline decoration-line-strong underline-offset-4 hover:text-signal">
+                        {testimonialCaption(t)}
+                      </Link>
+                    ) : (
+                      testimonialCaption(t)
+                    )}
                   </figcaption>
                 </figure>
               ))}

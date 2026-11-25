@@ -33,7 +33,7 @@ export default function AboutPage() {
         </h2>
         <div className="prose-ox lg:col-span-7 lg:col-start-6">
           {about.intro ? (
-            <p>{about.intro}</p>
+            about.intro.split("\n\n").map((para) => <p key={para}>{para}</p>)
           ) : (
             <>
               <Pending label="company introduction in your words (2–3 sentences)" />

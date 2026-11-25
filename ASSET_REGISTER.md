@@ -50,11 +50,10 @@ Done:
 - Domain: `gostuds.com` (GoStuds is a child company of Outnext Private Limited). Set in `.env.example`; copy to `.env.local` or the hosting provider's environment settings.
 - Logo: drafted by Claude. `public/brand/` (SVG + PNG, light and dark), favicon `src/app/icon.svg`, social image. Rebuild with `python assets-source/brand/build_logo.py .` (needs `fonttools`).
 
-| Item | Field | Shown on |
-|------|-------|----------|
-| Phone number (if different from WhatsApp) | `contact.phone` | Footer, Contact |
-| Business hours | `contact.hours` | Contact |
-| LinkedIn, Instagram, X, GitHub URLs (only those that exist; delete the rest) | `social[]` | Footer, Contact |
+- Phone (official contact): founder, +91 87428 65525.
+- Social: LinkedIn `linkedin.com/company/gostuds`, Instagram `instagram.com/gostudsofficial` (X and GitHub removed; none exist).
+
+- Business hours: 10:00 AM – 8:00 PM IST (days not specified).
 
 ### Team (`src/content/team.ts`)
 LinkedIn blocks automated reading, so profile details must be sent as text.
@@ -65,7 +64,7 @@ LinkedIn blocks automated reading, so profile details must be sent as text.
 | Sujal Verma (Co-founder) | Nothing (filled from résumé; phone and email deliberately not shown) |
 | Jaideep Singh (Co-founder) | Nothing |
 | Aman Jain (Co-founder) | LinkedIn |
-| Tushar Jain (Founding Engineer, UI/UX) | Rest of role title (message was cut off after "UI/UX and"). Confirm the LinkedIn/GitHub URLs (taken from résumé display text) |
+| Tushar Jain (Founding Engineer, UI/UX & Frontend) | Confirm the LinkedIn/GitHub URLs (taken from résumé display text) |
 
 Per person, send:
 ```
@@ -104,20 +103,14 @@ Cover image (or I'll compose one from screenshots):
 ```
 If GoStuds is Outnext's own product, it can be the first case study.
 
-### About page (`src/content/company.ts`)
-| Item | Field |
-|------|-------|
-| Company introduction in your words (2–3 sentences) | `about.intro` |
-| Further company milestones (real dates only) | `about.journey` |
-
-### FAQ answers that need a business decision (`src/content/company.ts` → `faqs`)
-- Who owns the source code and intellectual property?
-- Will you sign an NDA before we discuss the project?
+### About page and FAQ (`src/content/company.ts`)
+Done: company introduction (`about.intro`) and the IP and NDA answers, as supplied by the client.
+Optional: further milestones with real dates (`about.journey`).
 
 ### Social proof (only if real)
 | Item | Where |
 |------|-------|
-| Client testimonials: quote, name, role, company, permission | `testimonials` in `src/content/company.ts` |
+| Client testimonials: quote, company (name and role optional), permission. Dhanshree Export ✅ added | `testimonials` in `src/content/company.ts` |
 | Client logos and verified numbers | Homepage strip under the hero |
 
 ### Legal

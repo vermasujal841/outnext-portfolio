@@ -38,12 +38,12 @@ All text and data is in `src/content/`. You shouldn't need to touch the componen
 
 ## Placeholders
 
-Anything not yet provided is set to `PENDING` in the content files and shows on the site as a yellow
-dashed **"Pending: …"** marker, so nothing is invented.
+Anything not yet provided is set to `PENDING` in the content files, so nothing is invented. By default
+these are hidden: the site simply leaves out anything without real content.
 
 - To fill one, replace `PENDING` with the real value.
-- Before launch, set `NEXT_PUBLIC_SHOW_PLACEHOLDERS=false`. Every unfilled marker disappears, empty
-  project slots return 404, and sections with no real content (testimonials, client logos) are hidden.
+- While editing, set `NEXT_PUBLIC_SHOW_PLACEHOLDERS=true` in `.env.local` to see every unfilled slot as a
+  yellow dashed **"Pending: …"** marker.
 
 The full list of what's pending is in `ASSET_REGISTER.md`.
 
@@ -88,7 +88,7 @@ Vercel is the simplest option: import the repository, add the environment variab
 
 - [ ] All items in `ASSET_REGISTER.md` section 3 provided
 - [ ] `NEXT_PUBLIC_SITE_URL` set to the real domain
-- [ ] `NEXT_PUBLIC_SHOW_PLACEHOLDERS=false`
+- [ ] `NEXT_PUBLIC_SHOW_PLACEHOLDERS` not set to `true` in production
 - [ ] Resend configured and a test enquiry received
 - [ ] Privacy notice reviewed by your legal adviser or CA
 - [ ] Site submitted to Google Search Console

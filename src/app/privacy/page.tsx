@@ -39,7 +39,16 @@ export default function PrivacyPage() {
           </div>
           <div>
             <h2 className="t-h3 text-ink">Retention, your rights and third parties</h2>
-            <Pending label="retention period, data-principal rights and third-party processors (e.g. email provider, hosting)" className="mt-3" />
+            {/* Drafted by Claude: have your legal adviser or CA review before relying on it. */}
+            <p className="mt-3">
+              We keep enquiry details only for as long as we need them to respond to you and to manage any project that
+              follows. You can ask us to access, correct or delete your personal information at any time by writing to
+              the address above.
+            </p>
+            <p className="mt-3">
+              We do not sell your information. It is processed by the service providers that run this website, such as
+              our hosting and email delivery providers, only so that your enquiry reaches us.
+            </p>
           </div>
         </div>
       </section>

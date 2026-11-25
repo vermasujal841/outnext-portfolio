@@ -4,10 +4,10 @@
  * ─────────────────────────────────────────────────────────────────────────────
  *  Drafted from the brief's positioning. Review the wording: it describes how
  *  Outnext works, so it should match how you actually work.
- *  Items marked PENDING need a business decision from you.
+ *  The About intro and the IP / NDA FAQ answers were supplied by the client.
  * ─────────────────────────────────────────────────────────────────────────────
  */
-import { PENDING, type Maybe } from "./site";
+import type { Maybe } from "./site";
 
 export const hero = {
   headline: "We build the software your business runs on.",
@@ -96,17 +96,19 @@ export const faqs: Faq[] = [
     a: "Yes. We offer ongoing maintenance, monitoring, updates and new feature development after launch.",
   },
   {
-    q: "Who owns the source code and intellectual property?",
-    a: PENDING,
+    q: "Who owns the source code and intellectual property after project completion?",
+    a: "We believe clients should have ownership and control over the products built for them. For custom development projects, ownership and transfer of project-specific source code and intellectual property will be defined in the project agreement. Upon completion of the agreed payments and contractual obligations, the client receives the agreed ownership rights and access to the deliverables.\n\nPre-existing tools, reusable components, third-party libraries and open-source software remain subject to their respective licences and ownership terms.",
   },
   {
-    q: "Will you sign an NDA before we discuss the project?",
-    a: PENDING,
+    q: "Can we sign an NDA before discussing our project?",
+    a: "Absolutely. We understand that your business ideas, product concepts, technical architecture and business information can be confidential. We are happy to review and sign a mutually agreed Non-Disclosure Agreement (NDA) before discussing sensitive project details or sharing confidential information.\n\nWe believe confidentiality and trust are essential to building successful long-term business relationships.",
   },
 ];
 
 export const about = {
-  intro: PENDING as Maybe<string>,
+  /** Supplied by the client (25 Nov 2026). Paragraphs separated by a blank line. */
+  intro:
+    "Outnext Pvt. Ltd. is a technology and software development company focused on building innovative digital products, intelligent software solutions and scalable technology systems. We work with startups, entrepreneurs and businesses to transform ideas and business challenges into practical digital solutions through web development, mobile applications, SaaS platforms, artificial intelligence, automation and digital growth strategies.\n\nOur approach combines engineering expertise, creative problem-solving and a deep understanding of business requirements to deliver technology that creates real value." as Maybe<string>,
   vision:
     "A world where every growing business can use the same quality of software and AI as the largest companies.",
   mission:
@@ -154,5 +156,18 @@ export const credibility = [
   { label: "Full product capability", value: "Web, mobile, SaaS, AI, automation and search under one roof" },
 ];
 
-/** Testimonials: PENDING. Add only real quotes with the client's permission. */
-export const testimonials: { quote: string; name: string; role: string; company: string }[] = [];
+/** Real client quotes only, with the client's permission. `project` links a quote to its case study. */
+export type Testimonial = { quote: string; name?: string; role?: string; company: string; project?: string };
+
+export const testimonials: Testimonial[] = [
+  {
+    quote:
+      "Working with Outnext Pvt. Ltd. has been a wonderful experience. Aman and Tushar did an excellent job understanding our requirements and turning our vision into a professional website. From the creative design and development to handling the technical aspects of the website, they demonstrated great dedication, creativity, and professionalism. Their support and communication throughout the process made everything smooth and hassle-free. We are very happy with their work and would happily recommend Outnext to other businesses looking for reliable technology solutions.",
+    company: "Dhanshree Export",
+    project: "dhanshree-export",
+  },
+];
+
+export function testimonialCaption(t: Testimonial) {
+  return [t.name, t.role, t.company].filter(Boolean).join(", ");
+}

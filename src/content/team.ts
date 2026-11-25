@@ -83,7 +83,7 @@ export const team: TeamMember[] = [
   {
     id: "tushar-jain",
     name: "Tushar Jain",
-    role: "Founding Engineer, UI/UX",
+    role: "Founding Engineer, UI/UX & Frontend",
     credentials: ["MCA, JECRC University", "MERN stack developer"],
     bio: "Full-stack MERN developer. Has built an enterprise project-management system with JWT and role-based access control, Kanban and calendar views, file management and real-time notifications over Socket.IO.",
     expertise: ["React.js", "Node.js", "Express.js", "MongoDB", "REST APIs", "Socket.IO"],

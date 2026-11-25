@@ -19,7 +19,15 @@ export function FaqList({ items }: { items: Faq[] }) {
             </span>
           </summary>
           <div className="pb-6 pr-12 text-muted">
-            {f.a ? <p className="max-w-[68ch]">{f.a}</p> : <Pending label="answer (business decision)" />}
+            {f.a ? (
+              <div className="max-w-[68ch] space-y-3">
+                {f.a.split("\n\n").map((para) => (
+                  <p key={para}>{para}</p>
+                ))}
+              </div>
+            ) : (
+              <Pending label="answer (business decision)" />
+            )}
           </div>
         </details>
       ))}
